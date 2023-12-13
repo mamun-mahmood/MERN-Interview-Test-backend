@@ -16,12 +16,14 @@ const createDrawing = async (req, res) => {
       .send({
         message: "Drawing created successfully",
         data: newDrawing,
+        success: true,
       })
       .status(201);
   } catch (err) {
     res
       .send({
         message: err.message,
+        success: false,
       })
       .status(400);
   }
@@ -33,10 +35,12 @@ const getAllDrawings = async (req, res) => {
     res.send({
       message: "Drawings fetched successfully",
       data: drawings,
+      success: true,
     });
   } catch (err) {
     res.send({
       message: err.message,
+      success: false,
     });
   }
 };
@@ -73,10 +77,12 @@ const updateDrawing = async (req, res) => {
     res.send({
       message: "Drawing updated successfully",
       data: drawing,
+      success: true,
     });
   } catch (err) {
     res.send({
       message: err.message,
+      success: false,
     });
   }
 };
@@ -91,6 +97,7 @@ const deleteDrawing = async (req, res) => {
   } catch (err) {
     res.send({
       message: err.message,
+      success: false,
     }).status(400);
   }
 };
