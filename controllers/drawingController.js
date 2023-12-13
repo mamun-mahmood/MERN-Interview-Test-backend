@@ -86,11 +86,12 @@ const deleteDrawing = async (req, res) => {
     await Drawing.findByIdAndDelete(req.params.id);
     res.send({
       message: "Drawing deleted successfully",
-    });
+      success: true,
+    }).status(204);
   } catch (err) {
     res.send({
       message: err.message,
-    });
+    }).status(400);
   }
 };
 
