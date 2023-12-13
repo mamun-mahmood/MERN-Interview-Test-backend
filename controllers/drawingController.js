@@ -31,7 +31,10 @@ const createDrawing = async (req, res) => {
 
 const getAllDrawings = async (req, res) => {
   try {
-    const drawings = await Drawing.find().sort({ createdAt: -1 });
+    const drawings = await Drawing.find({
+      // include createdAt field in response
+      createdAt: { $exists: true },
+    }).sort({ createdAt: -1 });
     res.send({
       message: "Drawings fetched successfully",
       data: drawings,
