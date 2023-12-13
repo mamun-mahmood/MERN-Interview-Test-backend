@@ -4,7 +4,7 @@ const drawingController = require('../controllers/drawingController');
 router.post('/drawing', drawingController.createDrawing);
 router.get('/drawings', drawingController.getAllDrawings);
 router.get('/drawing/:id', drawingController.getDrawingById);
-router.put('drawing/:id', drawingController.updateDrawing);
-router.delete('drawing/:id', drawingController.deleteDrawing);
+router.put('/drawing/:id', drawingController.updateDrawing);
+router.delete('/drawing/:id', drawingController.deleteDrawing);
 
 module.exports = router;

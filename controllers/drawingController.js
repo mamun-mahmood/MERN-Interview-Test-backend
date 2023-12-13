@@ -29,7 +29,7 @@ const createDrawing = async (req, res) => {
 
 const getAllDrawings = async (req, res) => {
   try {
-    const drawings = await Drawing.find();
+    const drawings = await Drawing.find().sort({ createdAt: -1 });
     res.send({
       message: "Drawings fetched successfully",
       data: drawings,
@@ -48,17 +48,51 @@ const getDrawingById = async (req, res) => {
       message: "Drawing fetched successfully",
       data: drawing,
     });
-  }
-  catch (err) {
+  } catch (err) {
     res.send({
       message: err.message,
     });
   }
 };
 
-const updateDrawing = async (req, res) => {};
+const updateDrawing = async (req, res) => {
+  const { lines, shapes, textAnnotations } = req.body || {};
+  if (!lines && !shapes && !textAnnotations) {
+    res
+      .send({
+        message:
+          "A drawing must have at least one line, shape or text annotation",
+        success: false,
+      })
+      .status(400);
+  }
+  try {
+    const drawing = await Drawing.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    res.send({
+      message: "Drawing updated successfully",
+      data: drawing,
+    });
+  } catch (err) {
+    res.send({
+      message: err.message,
+    });
+  }
+};
 
-const deleteDrawing = async (req, res) => {};
+const deleteDrawing = async (req, res) => {
+  try {
+    await Drawing.findByIdAndDelete(req.params.id);
+    res.send({
+      message: "Drawing deleted successfully",
+    });
+  } catch (err) {
+    res.send({
+      message: err.message,
+    });
+  }
+};
 
 module.exports = {
   createDrawing,
