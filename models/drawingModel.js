@@ -5,7 +5,6 @@ const drawingSchema = new mongoose.Schema(
     title: {
       type: String,
       required: [true, "A drawing must have a title"],
-      unique: true,
       trim: true,
       maxlength: [
         40,
