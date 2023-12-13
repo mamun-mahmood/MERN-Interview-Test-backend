@@ -22,10 +22,19 @@ const drawingSchema = new mongoose.Schema(
       default: Date.now(),
       select: false,
     },
-    drawing: {
-      type: String,
-      required: [true, "A drawing must have a drawing"],
+    lines: {
+      type: Array,
+      default: [],
     },
+    shapes: {
+      type: Array,
+      default: [],
+    },
+    textAnnotations: {
+      type: Array,
+      default: [],
+    },
+    
     // user: {
     //   type: mongoose.Schema.ObjectId,
     //   ref: "User",
